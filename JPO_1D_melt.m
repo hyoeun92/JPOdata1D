@@ -267,9 +267,8 @@ corrected_depth = Znot - zstar;
 % lambda 2 + lambda3*corrected_depth is the pressure freezing point of seawater at the depth of the virtual source
 % evaluated using the linearized Clausius- Clapeyron equation 
 
-DTFDP = -0.0743; % dT_{f}/dP , [degree/MPa]
 pressure_corr = (rho_sw)*grav*( - corrected_depth );
-T_melting_corr = DTFDP*(pressure_corr*10^-6 -0.1);
+T_melting_corr =  ( 273.15*exp( -0.00027196*(pressure_corr*10^-6 - 0.1) ) ) - 273.15  % 0.1 is for atmospheric pressure in the unit of MPa
 
 % virtual thermal forcing \Delta T_{z = Z_{gl} + zstar}
 TF_source = T_melting_corr - (lambda2 + lambda3*( corrected_depth )) ; 
